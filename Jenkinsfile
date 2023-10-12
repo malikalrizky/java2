@@ -5,15 +5,15 @@ pipeline {
     agent any
 
     stages {
-        stage('Build Docker Image') {
-            steps {
-                script {
-                sh """
-                docker build --cache-from ${DOCKER_IMAGE}:${DOCKER_TAG} -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
-                """
-              }
-            }
-        }
+        // stage('Build Docker Image') {
+        //     steps {
+        //         script {
+        //         sh """
+        //         docker build --cache-from ${DOCKER_IMAGE}:${DOCKER_TAG} -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
+        //         """
+        //       }
+        //     }
+        // }
 
         // stage('Push Docker Image') {
         //     steps {
