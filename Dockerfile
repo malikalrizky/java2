@@ -2,13 +2,13 @@ FROM maven:3.9.4-eclipse-temurin-17-alpine as build
 
 WORKDIR /app
 COPY . /app
-RUN mvn clean package
+RUN mvn clean install
 
 FROM eclipse-temurin:17-jre-alpine
 
 WORKDIR /app
 
-COPY --from=build /app/target/my-app-1.0-SNAPSHOT.jar /app/hello-world.jar
+COPY --from=build /app/target/demo-0.0.1-SNAPSHOT.jar /app/app.jar
 
-ENTRYPOINT ["java", "-jar", "/app/hello-world.jar"]
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
  

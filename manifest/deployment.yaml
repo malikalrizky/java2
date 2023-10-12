@@ -20,6 +20,7 @@ spec:
       containers:
       - name: hello-world
         image: malikalrk/java:latest
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
         livenessProbe:
@@ -32,7 +33,7 @@ spec:
             port: 8080
       imagePullSecrets:
       - name: docker-credentials
-      imagePullPolicy: IfNotPresent
+
 ---
 apiVersion: v1
 kind: Service
