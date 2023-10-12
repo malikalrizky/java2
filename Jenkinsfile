@@ -12,15 +12,15 @@ pipeline {
         //     }
         // }
 
-        stage('Build Docker Image') {
-            steps {
-                script {
-                sh """
-                docker build --cache-from ${DOCKER_IMAGE}:${DOCKER_TAG} -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
-                """
-              }
-            }
-        }
+        // stage('Build Docker Image') {
+        //     steps {
+        //         script {
+        //         sh """
+        //         docker build --cache-from ${DOCKER_IMAGE}:${DOCKER_TAG} -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
+        //         """
+        //       }
+        //     }
+        // }
 
         // stage('Push Docker Image') {
         //     steps {
@@ -31,6 +31,16 @@ pipeline {
         //       }
         //     }
         // }
+
+        stage('kubeconfig') {
+            steps {
+                script {
+                sh """
+                kubectl config use-context ${CLUSTER}
+                """
+              }
+            }
+        }
 
         stage('Deploy') {
             steps {
