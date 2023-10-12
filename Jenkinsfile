@@ -37,7 +37,7 @@ pipeline {
             steps {
                 script {
                 sh """
-                kubectl config use-context ${CLUSTER} ${KUBE_CONFIG}
+                kubectl config use-context ${CLUSTER} --kubeconfig=${KUBE_CONFIG}
                 """
               }
             }
@@ -47,7 +47,7 @@ pipeline {
             steps {
                 script {
                 sh """
-                kubectl apply -f manifest/deployment.yaml --context ${CLUSTER} ${KUBE_CONFIG}
+                kubectl apply -f manifest/deployment.yaml --context --kubeconfig=${CLUSTER} ${KUBE_CONFIG}
                 """
               }
             }
