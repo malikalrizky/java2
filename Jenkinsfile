@@ -1,7 +1,6 @@
 def DOCKER_IMAGE = "java"
 def DOCKER_TAG = "latest"
 def CLUSTER = "k3d-mycluster"
-def KUBE_CONFIG = "/home/malik/config"
 pipeline {
     agent any
 
@@ -30,7 +29,7 @@ pipeline {
             steps {
                 script {
                 sh """
-                kubectl config use-context ${CLUSTER} --kubeconfig=${KUBE_CONFIG}
+                kubectl config use-context ${CLUSTER}
                 """
               }
             }
@@ -40,7 +39,7 @@ pipeline {
             steps {
                 script {
                 sh """
-                kubectl apply -f manifest/deployment.yaml --context --kubeconfig=${CLUSTER} ${KUBE_CONFIG}
+                kubectl apply -f manifest/deployment.yaml --context ${CLUSTER}
                 """
               }
             }
