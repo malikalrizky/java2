@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: hello-world
-        image: java:latest
+        image: malikalrk/java:latest
         ports:
         - containerPort: 8080
         livenessProbe:
