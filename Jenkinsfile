@@ -1,7 +1,7 @@
 def DOCKER_IMAGE = "java"
 def DOCKER_TAG = "latest"
 def CLUSTER = "k3d-mycluster"
-def KUBE_CONFIG = "/home/malik/.kube/config"
+def KUBE_CONFIG = "/home/malik/config"
 pipeline {
     agent any
 
