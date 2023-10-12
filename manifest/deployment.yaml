@@ -30,6 +30,9 @@ spec:
           httpGet:
             path: /  
             port: 8080
+      imagePullSecrets:
+      - name: docker-credentials
+      imagePullPolicy: IfNotPresent
 ---
 apiVersion: v1
 kind: Service
