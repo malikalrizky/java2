@@ -52,7 +52,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        envsubst < manifest/deployment.yaml > manifest/deployment_env.yaml
+                        sed -e "s/\$DOCKER_IMAGE/${DOCKER_IMAGE}/g" -e "s/\$BUILD_NUMBER/${BUILD_NUMBER}/g" manifest/deployment.yaml > manifest/deployment_env.yaml
                     '''
                 }
             }
