@@ -22,7 +22,8 @@ pipeline {
             steps {
                 script {
                 sh """
-                docker build --cache-from $DOCKER_IMAGE:$BUILD_NUMBER -t $DOCKER_IMAGE:$BUILD_NUMBER .
+                docker build --cache-from $DOCKER_IMAGE:latest -t $DOCKER_IMAGE:$BUILD_NUMBER .
+                docker tag $DOCKER_IMAGE:$BUILD_NUMBER $DOCKER_IMAGE:latest
                 """
               }
             }
@@ -33,6 +34,7 @@ pipeline {
                 script {
                 sh """
                 docker push $DOCKER_IMAGE:$BUILD_NUMBER
+                docker push $DOCKER_IMAGE:latest
                 """
               }
             }
