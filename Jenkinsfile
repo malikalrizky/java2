@@ -52,7 +52,8 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        sed -e "s/\$DOCKER_IMAGE/${DOCKER_IMAGE}/g" -e "s/\$BUILD_NUMBER/${BUILD_NUMBER}/g" manifest/deployment.yaml > manifest/deployment_env.yaml
+                        sed -i "s/\\\$DOCKER_IMAGE/${DOCKER_IMAGE}/g" manifest/deployment.yaml
+                        sed -e "s/\$BUILD_NUMBER/${BUILD_NUMBER}/g" manifest/deployment.yaml
                     '''
                 }
             }
@@ -62,7 +63,7 @@ pipeline {
             steps {
                 script {
                 sh """
-                kubectl apply -f manifest/deployment_env.yaml --context $CLUSTER
+                kubectl apply -f manifest/deployment.yaml --context $CLUSTER
                 """
               }
             }
