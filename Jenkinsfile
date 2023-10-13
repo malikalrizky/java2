@@ -22,7 +22,7 @@ pipeline {
             steps {
                 script {
                 sh """
-                docker build --cache-from ${DOCKER_IMAGE}:${DOCKER_TAG} -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
+                docker build --cache-from $DOCKER_IMAGE:$BUILD_NUMBER -t ${DOCKER_IMAGE}:$BUILD_NUMBER .
                 """
               }
             }
@@ -32,7 +32,7 @@ pipeline {
             steps {
                 script {
                 sh """
-                docker push ${DOCKER_IMAGE}:${DOCKER_TAG}
+                docker push $DOCKER_IMAGE:$BUILD_NUMBER
                 """
               }
             }
@@ -42,17 +42,26 @@ pipeline {
             steps {
                 script {
                 sh """
-                kubectl config use-context ${CLUSTER}
+                kubectl config use-context $CLUSTER
                 """
               }
             }
         }
 
+        stage('Substitute Environment Variables') {
+            steps {
+                script {
+                    sh '''
+                        envsubst < manifest/deployment.yaml > manifest/deployment_env.yaml
+                    '''
+                }
+            }
+
         stage('Deploy') {
             steps {
                 script {
                 sh """
-                kubectl apply -f manifest/deployment.yaml --context ${CLUSTER}
+                kubectl apply -f manifest/deployment_env.yaml --context $CLUSTER
                 """
               }
             }

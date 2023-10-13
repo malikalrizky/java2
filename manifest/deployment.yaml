@@ -19,8 +19,8 @@ spec:
     spec:
       containers:
       - name: hello-world
-        image: malikalrk/java:latest
-        imagePullPolicy: Always
+        image: $DOCKER_IMAGE:$BUILD_NUMBER
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
         livenessProbe:
