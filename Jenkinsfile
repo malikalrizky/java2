@@ -22,7 +22,7 @@ pipeline {
             steps {
                 script {
                 sh """
-                docker build --cache-from $DOCKER_IMAGE:$BUILD_NUMBER -t ${DOCKER_IMAGE}:$BUILD_NUMBER .
+                docker build --cache-from $DOCKER_IMAGE:$BUILD_NUMBER -t $DOCKER_IMAGE:$BUILD_NUMBER .
                 """
               }
             }
@@ -52,7 +52,6 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        sed -i "s/\\\$DOCKER_IMAGE/$DOCKER_IMAGE/g" manifest/deployment.yaml
                         sed -e "s/\\\$BUILD_NUMBER/$BUILD_NUMBER/g" manifest/deployment.yaml
                     '''
                 }
