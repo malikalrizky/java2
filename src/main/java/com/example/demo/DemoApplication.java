@@ -18,6 +18,6 @@ class HelloWorldController {
 
     @GetMapping("/")
     public String helloWorld() {
-        return "Hello World versi 1";
+        return "Hello World versi 2";
     }
 }
