@@ -1,6 +1,6 @@
 def DOCKER_IMAGE = "malikalrk/java"
 def DOCKER_TAG = "latest"
-def CLUSTER = "minikube"
+def CLUSTER = "k3d-mycluster"
 pipeline {
     agent any
 
